@@ -1,0 +1,12 @@
+--- Makefile	2025-09-29 12:08:17.339228189 +0000
++++ Makefile	2025-09-29 12:08:30.663664023 +0000
+@@ -408,7 +408,8 @@
+ 	imx6ulz-14x14-evk-btwifi.dtb \
+ 	imx6ulz-14x14-evk-emmc.dtb \
+ 	imx6ulz-14x14-evk-gpmi-weim.dtb \
+-	imx6ulz-bsh-smm-m2.dtb
++	imx6ulz-bsh-smm-m2.dtb \
++	imx6ull-datalogger.dtb
+ 
+ imx6ul-14x14-evk-reve-dtbs := imx6ul-14x14-evk.dtb imx6ul-14x14-evk-reve.dtbo
+ imx6ul-14x14-evk-reve-csi-dtbs := imx6ul-14x14-evk-csi.dtb imx6ul-14x14-evk-reve.dtbo
