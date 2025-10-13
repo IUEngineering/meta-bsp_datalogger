@@ -1,14 +1,17 @@
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 
-FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
+SRC_URI += "file://0001-Datalogger-changes.patch"
+
+KERNEL_IMAGETYPE = "zImage"
+KERNEL_DEFCONFIG:imx6ull-datalogger = "${WORKDIR}/arch/arm/configs/imx_v7_datalogger_defconfig"
 KBUILD_DEFCONFIG:imx6ull-datalogger = "imx_v7_datalogger_defconfig"
+IMX_KERNEL_CONFIG_AARCH32 = "imx_v7_datalogger_defconfig"
+
 KERNEL_DEVICETREE += "nxp/imx/imx6ull-datalogger.dtb"
 
 SRC_URI += "file://nxp/imx/imx6ull-datalogger.dts \
-            file://nxp/imx/makefile-add-datalogger-dts.patch \
             file://nxp/imx/imx6ull-datalogger.dtsi \
            "
-
-SRC_URI += "file://imx_v7_datalogger_defconfig"
 
 C_DTS = "nxp/imx/imx6ull-datalogger.dts"
 C_DTSI = "nxp/imx/imx6ull-datalogger.dtsi"
@@ -27,7 +30,6 @@ do_configure:append() {
     install -m 0644 ${WORKDIR}/nxp/imx/makefile-add-datalogger-dts.patch \
         ${S}/arch/arm/boot/dts/nxp/imx/
 
-    install -m 0644 ${WORKDIR}/imx_v7_datalogger_defconfig ${S}/arch/arm/configs/
 }
 
 DTB_TO_DEPLOY = "imx6ull-datalogger.dtb"
