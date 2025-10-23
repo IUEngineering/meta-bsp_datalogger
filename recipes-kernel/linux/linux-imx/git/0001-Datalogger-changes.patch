@@ -1,6 +1,8 @@
---- Makefile	2025-09-29 12:08:17.339228189 +0000
-+++ Makefile	2025-09-29 12:08:30.663664023 +0000
-@@ -408,7 +408,8 @@
+diff --git a/arch/arm/boot/dts/nxp/imx/Makefile b/arch/arm/boot/dts/nxp/imx/Makefile
+index 12e091dc4c4c..cfc33687422b 100644
+--- a/arch/arm/boot/dts/nxp/imx/Makefile
++++ b/arch/arm/boot/dts/nxp/imx/Makefile
+@@ -408,7 +408,8 @@ dtb-$(CONFIG_SOC_IMX6UL) += \
  	imx6ulz-14x14-evk-btwifi.dtb \
  	imx6ulz-14x14-evk-emmc.dtb \
  	imx6ulz-14x14-evk-gpmi-weim.dtb \

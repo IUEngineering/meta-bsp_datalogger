@@ -1,0 +1,219 @@
+// SPDX-License-Identifier: (GPL-2.0 OR MIT)
+//
+// Copyright (C) 2016 Freescale Semiconductor, Inc.
+
+/dts-v1/;
+
+#include "imx6ull.dtsi"
+// #include "imx6ul-14x14-evk.dtsi"
+#include "imx6ull-datalogger.dtsi"
+
+/ {
+	model = "Datalogger rev 2.1";
+	compatible = "fsl,imx6ull-14x14-evk", "fsl,imx6ull";
+
+	chosen {
+		stdout-path = &uart1;
+	};
+
+	// 0x20000000 voor 512 MB
+	memory {
+		reg = <0x80000000 0x80000000>;
+	};
+
+	leds: leds {
+		compatible = "gpio-leds";
+	};
+	
+	ressurect: ressurect {	
+		compatible = "gpio-leds";
+	};
+};
+
+&clks {
+	assigned-clocks = <&clks IMX6UL_CLK_PLL3_PFD2>,
+			  <&clks IMX6UL_CLK_PLL4_AUDIO_DIV>;
+	assigned-clock-rates = <320000000>, <786432000>;
+};
+
+&fec1 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_enet1>;
+	phy-mode = "rmii";
+	phy-handle = <&ethphy0>;
+	status = "okay";
+};
+
+&fec2 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_enet2>;
+	phy-mode = "rmii";
+	phy-handle = <&ethphy1>;
+	status = "okay";
+
+	mdio {
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		ethphy0: ethernet-phy@2 {
+			compatible = "ethernet-phy-ieee802.3-c22";
+			reg = <2>;
+		};
+
+		ethphy1: ethernet-phy@1 {
+			compatible = "ethernet-phy-ieee802.3-c22";
+			reg = <1>;
+		};
+	};
+};
+
+// --
+
+
+
+&iomuxc_snvs {
+	pinctrl-names = "default_snvs";
+        pinctrl-0 = <&pinctrl_hog_2>;
+        imx6ul-evk {
+		pinctrl_hog_2: hoggrp-2 {
+                        fsl,pins = <
+                                MX6ULL_PAD_SNVS_TAMPER0__GPIO5_IO00      0x80000000
+                        >;
+                };
+
+		pinctrl_dvfs: dvfsgrp {
+                        fsl,pins = <
+                                MX6ULL_PAD_SNVS_TAMPER3__GPIO5_IO03      0x79
+                        >;
+                };
+
+        };
+};
+
+
+&usbotg1 {
+	dr_mode = "host";
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_usb_otg1>;
+	status = "okay";
+};
+
+&usbotg2 {
+	dr_mode = "host";
+	pinctrl-names = "default";
+	status = "okay";
+};
+
+&usbphy1 {
+	tx-d-cal = <0x5>;
+};
+
+&usbphy2 {
+	tx-d-cal = <0x5>;
+};
+
+&uart1 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart1>;
+	status = "okay";
+};
+
+&uart2 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart2>;
+	// dmas = <&sdma 27 4 0>, <&sdma 28 4 0>;
+	// dma-names = "rx", "tx";
+	status = "okay";
+};
+
+&uart3 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart3>;
+	// dmas = <&sdma 29 4 0>, <&sdma 30 4 0>;
+	// dma-names = "rx", "tx";
+	status = "okay";
+};
+
+&uart4 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart4>;
+	// dmas = <&sdma 31 4 0>, <&sdma 32 4 0>;
+	// dma-names = "rx", "tx";
+	status = "okay";
+};
+
+&uart5 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart5>;
+	// dmas = <&sdma 33 4 0>, <&sdma 34 4 0>;
+	// dma-names = "rx", "tx";
+	status = "okay";
+};
+
+
+&uart6 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart6>;
+	status = "okay";
+};
+
+&uart7 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart7>;
+	status = "okay";
+};
+
+&uart8 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_uart8>;
+	status = "okay";
+};
+
+&usdhc1 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_usdhc1>;
+	cd-gpios = <&gpio1 19 GPIO_ACTIVE_LOW>;
+	keep-power-in-suspend;
+	enable-sdio-wakeup;
+	vmmc-supply = <&reg_sd1_vmmc>;
+	status = "okay";
+};
+
+&usdhc2 {
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_usdhc2>;
+	no-1-8-v;
+	non-removable;
+	keep-power-in-suspend;
+	enable-sdio-wakeup;
+	status = "okay";
+};
+
+&leds {
+		pinctrl-0 = <&pinctrl_sysleds>;
+		pinctrl-names = "default";
+		disk {
+			gpios = <&gpio4 7 GPIO_ACTIVE_HIGH>;
+			default-state = "off";
+			linux,default-trigger = "cpu";
+	
+		};
+		heartbeat {
+			gpios = <&gpio4 8 GPIO_ACTIVE_HIGH>;
+			default-state = "off";
+			linux,default-trigger = "heartbeat";
+		};
+};
+
+&ressurect {
+	gpio-controller;
+	pinctrl-0 = <&pinctrl_ressurect>;
+        pinctrl-names = "default";
+	
+	ressurect {
+		gpio-hog;
+		gpios = <&gpio3 10 GPIO_ACTIVE_HIGH>;
+		output;
+		label = "ressurect";		
+	};
+};
