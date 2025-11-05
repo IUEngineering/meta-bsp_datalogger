@@ -25,6 +25,7 @@ do_deploy:append() {
             continue
         fi
 
-        cp ${B}/arch/arm/boot/dts/nxp/imx/imx6ull-datalogger.dtb ${DEPLOYDIR}/imx6ull-datalogger.dtb
+        # Instead of modifying the u-boot-imx
+        cp ${B}/arch/arm/boot/dts/nxp/imx/imx6ull-datalogger.dtb ${DEPLOYDIR}/imx6ull-14x14-evk.dtb
     done
 }
