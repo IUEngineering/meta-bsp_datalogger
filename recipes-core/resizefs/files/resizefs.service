@@ -1,0 +1,11 @@
+[Unit]
+Description=Resize root filesystem on first boot
+After=local-fs.target
+
+[Service]
+Type=oneshot
+ExecStart=/sbin/resize2fs /dev/mmcblk1p4
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
