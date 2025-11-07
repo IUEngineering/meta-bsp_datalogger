@@ -4,7 +4,7 @@ After=local-fs.target
 
 [Service]
 Type=oneshot
-ExecStart=/sbin/resize2fs /dev/mmcblk1p2
+ExecStart=/usr/sbin/resizeRootfs.sh
 RemainAfterExit=yes
 
 [Install]
