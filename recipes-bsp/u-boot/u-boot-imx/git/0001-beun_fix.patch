@@ -1,0 +1,33 @@
+From 2fbde4b7696b351d8001444487bd4cbcd63d3868 Mon Sep 17 00:00:00 2001
+From: Illya Ustenko <illya.ustenko@hva.nl>
+Date: Thu, 13 Nov 2025 14:40:29 +0000
+Subject: [PATCH] beun_fix
+
+---
+ include/configs/mx6ullevk.h | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/include/configs/mx6ullevk.h b/include/configs/mx6ullevk.h
+index 9a0c14efce5..8ca0e79312d 100644
+--- a/include/configs/mx6ullevk.h
++++ b/include/configs/mx6ullevk.h
+@@ -8,7 +8,6 @@
+ #ifndef __MX6ULLEVK_CONFIG_H
+ #define __MX6ULLEVK_CONFIG_H
+ 
+-
+ #include <asm/arch/imx-regs.h>
+ #include <linux/sizes.h>
+ #include <linux/stringify.h>
+@@ -86,7 +85,7 @@
+ 	"console=ttymxc0\0" \
+ 	"fdt_high=0xffffffff\0" \
+ 	"initrd_high=0xffffffff\0" \
+-	"fdt_file=undefined\0" \
++	"fdt_file=imx6ull-datalogger.dtb\0" \
+ 	"fdt_addr=0x83000000\0" \
+ 	"tee_addr=0x84000000\0" \
+ 	"tee_file=undefined\0" \
+-- 
+2.34.1
+
